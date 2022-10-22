@@ -21,10 +21,10 @@
 
 if( (!empty($_POST['nom'])) && (!empty($_POST['prenom'])) && isset($_POST['nom']) && isset($_POST['prenom']) )
 {
-    $perIdentifiant = "10555511";
-    $perPassword = "Ok";
     $nom_personne = $_POST['nom'];
     $prenom_personne = $_POST['prenom'];
+    $perIdentifiant = strtolower($nom_personne.'.'.$prenom_personne);
+    $perPassword = "Ok";
     $sexe_personne = $_POST['sexe'];
     $metier_personne = $_POST['metier'];
     $service_personne = $_POST['service'];

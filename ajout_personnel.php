@@ -1,8 +1,8 @@
 <?php
 
   $servername = "172.16.193.254";
-  $username = "hopital-user"; // Later : "UserRugby"
-  $password = "bKmKTazcwWl3emRc"; // Later : +StadeRochelais+17000€
+  $username = "hopital-user";
+  $password = "bKmKTazcwWl3emRc";
   $db = "hopital-data";
 
   // Create connection
