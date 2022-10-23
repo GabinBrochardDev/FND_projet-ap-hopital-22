@@ -1,5 +1,7 @@
 <?php
 
+/* Connexion BDD Developpement
+
   $servername = "172.16.193.254";
   $username = "hopital-user";
   $password = "bKmKTazcwWl3emRc";
@@ -12,8 +14,26 @@
   if ($connexion_db->connect_error) {
     die("Connection failed: " . $connexion_db->connect_error);
   }
+*/
+
+//* Connexion BDD WSL
+
+  $servername = "localhost";
+  $username = "root";
+  $password = '$SrvLudo+00!';
+  $db = "hopital-data";
+
+  // Create connection
+  $connexion_db = new mysqli($servername, $username, $password, $db);
+
+  // Check connection
+  if ($connexion_db->connect_error) {
+    die("Connection failed: " . $connexion_db->connect_error);
+  }
+
 
 ?>
+
 
 <!doctype html>
 <html lang="fr">
@@ -205,6 +225,13 @@
                 ?>
             </select>
             </select>
+            <br>
+            <label>Administrateur</label>
+            <br>
+            <label>Non</label>
+            <input type="radio" id="non" name="admin" value="0" checked>
+            <label>Oui</label>
+            <input type="radio" id="oui" name="admin" value="1">
             <br>
             <button type="submit">Confirmer</button>
         </form>
