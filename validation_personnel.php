@@ -48,8 +48,8 @@ if( (!empty($_POST['nom'])) && (!empty($_POST['prenom'])) && isset($_POST['nom']
     $service_personne = $_POST['service'];
     $perIdentifiant = strtolower($prenom_personne.'.'.$nom_personne);
 
-    $sql = "SELECT * FROM personnel WHERE personnel.perIdentifiant LIKE '%$perIdentifiant%'";
-    $result = $connexion_db->query($sql) or die('Select - Erreur SQL ! '.$connexion_db->error );
+    $sql = "SELECT * FROM personnel WHERE personnel.perIdentifiant = '$perIdentifiant'";
+    $result = $connexion_db->query($sql) or die(header('Location: ajout_personnel.php'));
 
     /* Détermine le nombre de lignes du jeu de résultats de la requête */
     $nb_lignes = $result->num_rows;
@@ -66,7 +66,6 @@ if( (!empty($_POST['nom'])) && (!empty($_POST['prenom'])) && isset($_POST['nom']
       /* On modifie l'identifiant de la personne */
       $perIdentifiant = $perIdentifiant.$cpt_ID;
     }
-    $result->free();
 
     /* Initialisation des chaines contenant les alphabets minuscules et majuscules, les caractères spéciaux et les chiffres */
     $alphabet_min = 'abcdefghijklmnopqrstuvwxyz';
@@ -100,14 +99,13 @@ if( (!empty($_POST['nom'])) && (!empty($_POST['prenom'])) && isset($_POST['nom']
     $sql = "INSERT INTO personnel (perIdentifiant, perPassword, perNom, perPrenom, perSexe, perAdmin, idMetier, idService) VALUES ('$perIdentifiant', '$perPassword', '$nom_personne', '$prenom_personne', '$sexe_personne', $admin_personne, '$metier_personne', '$service_personne')";
     
     /* Insertion des données */
-    $result = $connexion_db->query($sql) or die('Insert - Erreur SQL ! '.$connexion_db->error );
+    $result = $connexion_db->query($sql) or die(header('Location: ajout_personnel.php'));
     
-    echo "<html><body onload='pageIndex()'><script> function pageIndex() { location.replace('index.html') } </script></body></html>";
-    //$result->free();
+    header('Location: ajout_personnel.php');
 }
 else
 {
-    echo "AJOUT DU PRODUIT IMPOSSIBLE !";
+  header('Location: ajout_personnel.php');
 }
 
 ?>
