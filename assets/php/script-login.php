@@ -13,7 +13,7 @@ echo "ok !";
     else
     { echo "conn ok !"; }
 
-    $sql = "SELECT idPersonnel, idMetier FROM personnel WHERE personnel.perIdentifiant = 'g.brochard' and personnel.perPassword = 'gabin'"; // $_POST['username'] $_POST['password']
+    $sql = "SELECT idPersonnel FROM personnel WHERE personnel.perIdentifiant = 'g.brochard' and personnel.perPassword = 'gabin'"; // $_POST['username'] $_POST['password']
     $result = $conn->query($sql);
 
     if ($result->num_rows = 1) // Si nombre de résultat > à 0 alors il existe un compte avec ces identifiant:
