@@ -37,8 +37,8 @@
 
 <?php
 
-
-if( (!empty($_POST['nom'])) && (!empty($_POST['prenom'])) && isset($_POST['nom']) && isset($_POST['prenom']) )
+// On vérifie si le nom et le prénom existent et ont été saisis
+if( isset($_POST['nom']) && isset($_POST['prenom']) && (!empty($_POST['nom'])) && (!empty($_POST['prenom'])) )
 {
     $nom_personne = $_POST['nom'];
     $prenom_personne = $_POST['prenom'];
@@ -48,7 +48,7 @@ if( (!empty($_POST['nom'])) && (!empty($_POST['prenom'])) && isset($_POST['nom']
     $service_personne = $_POST['service'];
     $perIdentifiant = strtolower($prenom_personne.'.'.$nom_personne);
 
-    $sql = "SELECT * FROM personnel WHERE personnel.perIdentifiant = '$perIdentifiant'";
+    $sql = "SELECT * FROM personnel WHERE personnel.perIdentifiant LIKE '%".$perIdentifiant."%'";
     $result = $connexion_db->query($sql) or die(header('Location: ajout_personnel.php'));
 
     /* Détermine le nombre de lignes du jeu de résultats de la requête */
@@ -96,11 +96,13 @@ if( (!empty($_POST['nom'])) && (!empty($_POST['prenom'])) && isset($_POST['nom']
     $perPassword = str_shuffle($perPassword);
 
     /* Construction de la requête */
-    $sql = "INSERT INTO personnel (perIdentifiant, perPassword, perNom, perPrenom, perSexe, perAdmin, idMetier, idService) VALUES ('$perIdentifiant', '$perPassword', '$nom_personne', '$prenom_personne', '$sexe_personne', $admin_personne, '$metier_personne', '$service_personne')";
-    
+    $sql = "INSERT INTO personnel (perIdentifiant, perPassword, perNom, perPrenom, perSexe, perAdmin, idMetier, idService)
+            VALUES ('".$perIdentifiant."', '".$perPassword."', '".$nom_personne."', '".$prenom_personne."', '".
+            $sexe_personne."',".$admin_personne.", '".$metier_personne."', '" .$service_personne."')";
+
     /* Insertion des données */
     $result = $connexion_db->query($sql) or die(header('Location: ajout_personnel.php'));
-    
+
     header('Location: ajout_personnel.php');
 }
 else
