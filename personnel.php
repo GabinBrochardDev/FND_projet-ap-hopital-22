@@ -131,7 +131,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="personnel.php">
                   <span data-feather="file-text" class="align-text-bottom"></span>
                   Nouveau membre du personnel
                 </a>
@@ -154,7 +154,7 @@
 
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
 
-           Nouveau membre du personnel<br><br>
+          Veuillez saisir les informations suivantes pour créer un nouveau membre du personnel<br><br>
         <form action="validation_personnel.php" method="post">
             <label>Nom</label>
             <input type="text" placeholder="Nom" name="nom">

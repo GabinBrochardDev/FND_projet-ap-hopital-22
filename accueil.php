@@ -129,7 +129,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="ajout_personnel.php">
+                <a class="nav-link" href="personnel.php">
                   <span data-feather="file-text" class="align-text-bottom"></span>
                   Nouveau membre du personnel
                 </a>
