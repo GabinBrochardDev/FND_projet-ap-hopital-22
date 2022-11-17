@@ -1,5 +1,5 @@
 <?php
-    /* Connexion BDD Developpement
+    // Connexion BDD Developpement
 
     $servername = "172.16.193.254";
     $username = "hopital-user";
@@ -12,10 +12,10 @@
     // Check connection
     if ($connexion_db->connect_error) {
         die("Connection failed: " . $connexion_db->connect_error);
-    }*/
+    }
     
 
-    /* Connexion BDD WSL */
+    /* Connexion BDD WSL
 
     $servername = "localhost";
     $username = "root";
@@ -29,4 +29,5 @@
     if ($connexion_db->connect_error) {
         die("Connection failed: " . $connexion_db->connect_error);
     }
+    */
 ?>
