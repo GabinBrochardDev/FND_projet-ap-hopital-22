@@ -1,10 +1,15 @@
 <?php
-
-  // Informations de la connnexion à la base
-  require('_connect.php');
-
+    session_start(); // Démarrage ou suite de la session
+    // Si une connexion de session n'existe pas, on redirige à la page 'index.php'
+    if ( !isset($_SESSION['connexion']) || ($_SESSION['connexion'] == 0) )
+    {   
+        header('Location: index.php');
+    }
+    // Récupération de l'adresse du site Internet
+    $_SESSION['page']['adresse'] = $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+    // Informations de la connnexion à la base
+    require('_connect.php');
 ?>
-
 
 <!doctype html>
 <html lang="fr">
@@ -33,7 +38,7 @@
       <input class="form-control form-control-dark w-100 rounded-0 border-0" type="text" placeholder="Search" aria-label="Search">
       <div class="navbar-nav">
         <div class="nav-item text-nowrap">
-          <a class="nav-link px-3" href="#">Sign out</a>
+          <a class="nav-link px-3" href="deconnexion.php">Sign out</a>
         </div>
       </div>
     </header>

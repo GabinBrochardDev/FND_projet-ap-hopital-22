@@ -1,3 +1,16 @@
+<?php
+    session_start(); // Démarrage ou suite de la session
+    // Si une connexion de session n'existe pas, on redirige à la page 'index.php'
+    if ( !isset($_SESSION['connexion']) || ($_SESSION['connexion'] == 0) )
+    {   
+        header('Location: index.php');
+    }
+    // Récupération de l'adresse du site Internet
+    $_SESSION['page']['adresse'] = $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+    // Informations de la connnexion à la base
+    require('_connect.php');
+?>
+
 <!doctype html>
 <html lang="fr">
   <head>
@@ -7,12 +20,6 @@
     <!-- <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors"> -->
     <meta name="generator" content="Hugo 0.104.2">
     <title>Dashboard Template · Bootstrap v5.2</title>
-
-
-    
-
-    
-
     <!-- <link href="./css/bootstrap.rtl.min.css" rel="stylesheet"> -->
 
     <!-- Custom styles for this template -->
@@ -29,7 +36,7 @@
       <input class="form-control form-control-dark w-100 rounded-0 border-0" type="text" placeholder="Search" aria-label="Search">
       <div class="navbar-nav">
         <div class="nav-item text-nowrap">
-          <a class="nav-link px-3" href="#">Sign out</a>
+          <a class="nav-link px-3" href="deconnexion.php">Sign out</a>
         </div>
       </div>
     </header>
@@ -124,7 +131,7 @@
               <li class="nav-item">
                 <a class="nav-link" href="ajout_personnel.php">
                   <span data-feather="file-text" class="align-text-bottom"></span>
-                  Nouveau membre du personel
+                  Nouveau membre du personnel
                 </a>
               </li>
               <!-- <li class="nav-item">
