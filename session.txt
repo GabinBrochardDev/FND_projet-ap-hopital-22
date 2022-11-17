@@ -1,3 +1,5 @@
+/* Modification */
+
 // Démarrage ou suite de la session
 session_start();
 
