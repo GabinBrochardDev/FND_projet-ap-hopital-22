@@ -33,21 +33,21 @@
                                     'nom' => $row['perNom'],
                                     'prenom' => $row['perPrenom'],
                                     'utilisateur' => $row['perIdentifiant'],
+                                    'connexion' => $row['perPremiereConnexion'],
                                     'admin' => $row['perAdmin']
                                 ];
 
-            /* On vérifie si l'utilisateur n'a pas modifié son mot de passe. On redirige vers la page de modification 'motdepasse.php'.
+            // On vérifie si l'utilisateur n'a pas modifié son mot de passe. On redirige vers la page de modification 'motdepasse.php'.
             if ($_SESSION['user']['connexion'] == 0)
             {
                 // Affectation du mot de passe pour le modifier
-                $_SESSION['motdepasse'] = $row['Motdepasse'];
+                $_SESSION['motdepasse'] = $row['perPassword'];
                 header('Location: motdepasse.php');
             }
-            else // On affiche la page 'atelier.php'.
+            else // On affiche la page 'accueil.php'.
             {
-                header('Location: atelier.php');
-            }  */
-            header('Location: accueil.php');
+                header('Location: accueil.php');
+            }
         }
         else // La requête ne fonctionne pas. On affiche la page 'index.php'.
         {

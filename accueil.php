@@ -5,6 +5,11 @@
     {   
         header('Location: index.php');
     }
+    // Si la variable de session de la connexion n'existe pas ou le mot de passe n'a pas été modifié, on affiche la page 'index.php'.
+    if ( !isset($_SESSION['user']['connexion']) || ($_SESSION['user']['connexion'] == 0) )
+    {
+        header('Location: index.php');
+    }
     // Récupération de l'adresse du site Internet
     $_SESSION['page']['adresse'] = $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
     // Informations de la connnexion à la base
@@ -25,7 +30,7 @@
     <!-- Custom styles for this template -->
     <link href="./assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="./assets/css/dashboard.css" rel="stylesheet">
-    <link href="./assets/css/style.css" rel="stylesheet">
+    <link href="./assets/css/styles.css" rel="stylesheet">
   </head>
   <body>
     <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
@@ -117,7 +122,6 @@
                 </a>
               </li> -->
             </ul>
-
             <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted text-uppercase">
               <span>Administration</span>
             </h6>

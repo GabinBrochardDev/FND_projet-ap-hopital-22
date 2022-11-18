@@ -48,3 +48,10 @@
     white-space: nowrap;
     -webkit-overflow-scrolling: touch;
   }
+
+
+  /* Taille de l'oeil du mot de passe */
+  #eye
+  {
+      width: 8%;
+  }
