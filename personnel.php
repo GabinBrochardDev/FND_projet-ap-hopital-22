@@ -160,12 +160,18 @@
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
 
           Veuillez saisir les informations suivantes pour créer un nouveau membre du personnel<br><br>
-        <form action="validation_personnel.php" method="post">
+        <form action="personnel_ajout.php" method="post">
             <label>Nom</label>
             <input type="text" placeholder="Nom" name="nom">
             <br>
             <label>Prénom</label>
             <input type="text" placeholder="Prénom" name="prenom">
+            <br>
+            <label>Mot de passe</label>
+            <input type="password" placeholder="Mot de passe" id="password" disabled>
+            <input type="hidden" name="password" id="password_hidden">
+            <img src="eye.svg" style="width:1%;" id="eye">
+            <input type="button" value="Générer" id="rand_password">
             <br>
             <label>Sexe</label>
             <br>
@@ -222,8 +228,12 @@
     </div>
 
 
-    <script src="./js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/dashboard.js"></script>
+    <script src="assets/js/motdepasse_aleatoire.js"></script>
+    <script src="assets/js/motdepasse.js"></script>
 
-      <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script><script src="dashboard.js"></script>
-  </body>
+      <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script>
+    </body>
 </html>

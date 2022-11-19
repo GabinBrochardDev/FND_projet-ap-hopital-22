@@ -9,20 +9,20 @@
     require('_connect.php');
 
     // On vérifie si le nom et le prénom existent et ont été saisis
-    if( isset($_POST['nom']) && isset($_POST['prenom']) && (!empty($_POST['nom'])) && (!empty($_POST['prenom'])) )
+    if( isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['password']) && (!empty($_POST['nom'])) && (!empty($_POST['prenom'])) && (!empty($_POST['password'])) )
     {
         // Initialisation des variables
         $nom_personne = $_POST['nom'];
         $prenom_personne = $_POST['prenom'];
+        $password_personne = $_POST['password'];
         $sexe_personne = $_POST['sexe'];
         $admin_personne = $_POST['admin'];
         $metier_personne = $_POST['metier'];
         $service_personne = $_POST['service'];
         $identifiant_personne = strtolower($prenom_personne.'.'.$nom_personne);
-        $password_personne = '';
 
         $sql = "SELECT * FROM personnel WHERE personnel.perIdentifiant LIKE '%".$identifiant_personne."%'";
-        $result = $connexion_db->query($sql) or die(header('Location: ajout_personnel.php'));
+        $result = $connexion_db->query($sql) or die(header('Location: personnel_ajout.php'));
 
         /* Détermine le nombre de lignes du jeu de résultats de la requête */
         $nb_lignes = $result->num_rows;
@@ -37,11 +37,11 @@
             $cpt_ID++;
             }
             /* On modifie l'identifiant de la personne */
-            $identifiant_personne = $identifiant_personne.$cpt_ID;
+            $identifiant_personne = $identifiant_personne.'.'.$cpt_ID;
         }
 
-        // Affectation d'un mot de passe aléatoire à la variable $password_personne
-        require('_motdepasse_aleatoire.php');
+        // Chiffrage du mot de passe de l'utilisateur en SHA-256
+        $password_personne = crypt($password_personne, '$5$HasHpWdHOpitALlr$');
 
         /* Construction de la requête */
         $sql = "INSERT INTO personnel (perIdentifiant, perPassword, perNom, perPrenom, perSexe, perAdmin, idMetier, idService)
@@ -49,13 +49,13 @@
                 $sexe_personne."',".$admin_personne.", '".$metier_personne."', '" .$service_personne."')";
 
         /* Insertion des données */
-        $result = $connexion_db->query($sql) or die(header('Location: ajout_personnel.php'));
+        $result = $connexion_db->query($sql) or die(header('Location: personnel.php'));
 
-        header('Location: ajout_personnel.php');
+        header('Location: personnel.php');
     }
     else
     {
-        header('Location: ajout_personnel.php');
+        header('Location: '. $_SESSION['page']['protocole'] . $_SESSION['page']['adresse'] . '');
     }
 
 ?>

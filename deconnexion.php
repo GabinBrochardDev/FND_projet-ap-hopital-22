@@ -5,8 +5,6 @@
     {
         header('Location: index.php');
     }
-    // Démarrage ou suite de la session
-    session_start();
     // Déconnexion de la session
     $_SESSION['connexion'] = 0;
     // Redirection à la page de connexion
