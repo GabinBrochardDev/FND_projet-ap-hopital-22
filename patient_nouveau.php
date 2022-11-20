@@ -25,8 +25,6 @@
     <!-- <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors"> -->
     <meta name="generator" content="Hugo 0.104.2">
     <title>Dashboard Template · Bootstrap v5.2</title>
-
-
     <!-- <link href="./css/bootstrap.rtl.min.css" rel="stylesheet"> -->
 
     <!-- Custom styles for this template -->
@@ -124,7 +122,6 @@
                 </a>
               </li> -->
             </ul>
-
             <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted text-uppercase">
               <span>Administration</span>
             </h6>
@@ -158,120 +155,71 @@
         </nav>
 
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-
-        <h3>Veuillez saisir les informations suivantes pour créer un nouveau membre du personnel</h3><br>
-        <form action="personnel_ajout.php" method="post">
-          <div class="gille_nouveau_personnel">
-          <div class="cellule_nouveau_personnel">
-            <label>Nom</label>
-          </div>
-          <div class="cellule_nouveau_personnel">
-            <input type="text" placeholder="Nom" name="nom">
-          </div>
-          <div class="cellule_nouveau_personnel">
-            <label>Prénom</label>
-          </div>
-          <div class="cellule_nouveau_personnel">
-            <input type="text" placeholder="Prénom" name="prenom">
-          </div>
-          <div class="cellule_nouveau_personnel">
-            <label>Mot de passe</label>
-          </div>
-          <div class="cellule_nouveau_personnel">
-            <input type="password" placeholder="Mot de passe" id="password" disabled>
-            <input type="hidden" name="password" id="password_hidden">
-            <img src="eye.svg" style="width:1%;" id="eye">
-            <input type="button" value="Générer" id="rand_password">
-          </div>
-          <div class="cellule_nouveau_personnel">
-            <label>Sexe</label>
-          </div>
-          <div class="cellule_nouveau_personnel">
-            <label>Femme</label>
-            <input type="radio" id="femme" name="sexe" value="Femme" checked>
-            <br>
-            <label>Homme</label>
-            <input type="radio" id="homme" name="sexe" value="Homme">
-            <br>
-            <label>Non Binaire</label>
-            <input type="radio" id="non_binaire" name="sexe" value="Non Binaire">
-          </div>
-          <div class="cellule_nouveau_personnel">
-            <label>Métier</label>
-          </div>
-          <div class="cellule_nouveau_personnel">
-            <?php
-                    // Tableau avec les noms des colonnes sélectionnées de la table 'Metier'
-                    $metier_colonnes = ['idMetier','metLibelle'];
-                    // Requête
-                    $sql = "SELECT * FROM metier";
-                    // Résultat de la requête
-                    $result = $connexion_db->query($sql) or die('Select - Erreur SQL ! '.$connexion_db->error );
-                    // On vérifie si une ligne est présente dans le résultat de la requête 
-                    if ( ($result->num_rows) > 0)
-                    {
-                        // On affiche le début de la liste
-                        echo '<select name="salle" id="salle">';
-                        // On boucle tant que l'on trouve une ligne dans le résultat de la requête
-                        while ($row = $result->fetch_assoc())
-                        {  
-                            // On affiche la ligne en cours de la liste
-                            echo '<option value=\'' . $row[$metier_colonnes[0]] . '\'>' . $row[$metier_colonnes[1]] . '</option>';
-                        }
-                        // On ferme la liste
-                        echo '</select>';
-                    }
-                    else
-                    {
-                        echo '<label>Aucune métier répertorié.</label>';
-                    }
-                ?>
+        <h3>Veuillez saisir les informations suivantes pour créer un nouveau patient</h3><br>
+        <form action="patient_ajout.php" method="post">
+            <div class="gille_nouveau_patient">
+                <div class="cellule_nouveau_patient">
+                    <label>Nom</label>
+                </div>
+                <div class="cellule_nouveau_patient">
+                    <input type="text" name="nom" id="nom">
+                </div>
+                <div class="cellule_nouveau_patient">
+                    <label>Prénom</label>
+                </div>
+                <div class="cellule_nouveau_patient">
+                    <input type="text" name="prenom" id="prenom">
+                </div>
+                <div class="cellule_nouveau_patient">
+                    <label>Sexe</label>
+                </div>
+                <div class="cellule_nouveau_patient">
+                <label>Femme</label>
+                    <input type="radio" id="femme" name="sexe" value="Femme" checked>
+                    <br>
+                    <label>Homme</label>
+                    <input type="radio" id="homme" name="sexe" value="Homme">
+                    <br>
+                    <label>Non Binaire</label>
+                    <input type="radio" id="non_binaire" name="sexe" value="Non Binaire">
+                </div>
+                <div class="cellule_nouveau_patient">
+                    Date de naissance
+                </div>
+                <div class="cellule_nouveau_patient">
+                    <input type="date" name="datenaissance" id="datenaissance">
+                </div>
+                <div class="cellule_nouveau_patient">
+                    N° de Sécurité Sociale
+                </div>
+                <div class="cellule_nouveau_patient">
+                    <input type="text" name="numsecu" id="numsecu">
+                </div>
+                <div class="cellule_nouveau_patient">
+                    <label>Adresse</label>
+                </div>
+                <div class="cellule_nouveau_patient">
+                    <input type="text" name="adresse" id="adresse">
+                </div>
+                <div class="cellule_nouveau_patient">
+                    <label>Code Postal</label>
+                </div>
+                <div class="cellule_nouveau_patient">
+                    <input type="text" name="codepostal" id="codepostal">
+                </div>
+                <div class="cellule_nouveau_patient">
+                    <label>Ville</label>
+                </div>
+                <div class="cellule_nouveau_patient">
+                    <input type="text" name="ville" id="ville">
+                </div>
+                <div class="cellule_nouveau_patient">
+                    <label>Pays</label>
+                </div>
+                <div class="cellule_nouveau_patient">
+                    <input type="text" name="pays" id="pays">
+                </div>
             </div>
-            <div class="cellule_nouveau_personnel">
-              <label>Service</label>
-            </div>
-            <div class="cellule_nouveau_personnel">
-              <?php
-                  // Tableau avec les noms des colonnes sélectionnées de la table 'Service'
-                  $service_colonnes = ['idService','serLibelle'];
-                  // Requête
-                  $sql = "SELECT * FROM service";
-                  // Résultat de la requête
-                  $result = $connexion_db->query($sql) or die('Select - Erreur SQL ! '.$connexion_db->error );
-
-                  // On vérifie si une ligne est présente dans le résultat de la requête 
-                  if ( ($result->num_rows) > 0)
-                  {
-                      // On affiche le début de la liste
-                      echo '<select name="service" id="service">';
-                      // On boucle tant que l'on trouve une ligne dans le résultat de la requête
-                      while ($row = $result->fetch_assoc())
-                      {  
-                          // On affiche la ligne en cours de la liste
-                          echo '<option value=\'' . $row[$service_colonnes[0]] . '\'>' . $row[$service_colonnes[1]] . '</option>';
-                      }
-                      // On ferme la liste
-                      echo '</select>';
-                  }
-                  else
-                  {
-                      echo '<label>Aucune service répertorié.</label>';
-                  }
-              ?>
-            </div>
-            <div class="cellule_nouveau_personnel">
-              <label>Administrateur</label>
-            </div>
-            <div class="cellule_nouveau_personnel">
-              <label>Non</label>
-              <input type="radio" id="non" name="admin" value="0" checked>
-              <br>
-              <label>Oui</label>
-              <input type="radio" id="oui" name="admin" value="1">
-            </div>
-          </div>
-          
-            <br>
             <button type="submit">Ajouter</button>
         </form>
         </main>
@@ -279,12 +227,8 @@
     </div>
 
 
-    <script src="assets/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/js/dashboard.js"></script>
-    <script src="assets/js/motdepasse_aleatoire.js"></script>
-    <script src="assets/js/motdepasse.js"></script>
+    <script src="./js/bootstrap.bundle.min.js"></script>
 
-      <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script>
-      <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script>
-    </body>
+      <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script><script src="dashboard.js"></script>
+  </body>
 </html>

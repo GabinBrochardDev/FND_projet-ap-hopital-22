@@ -13,8 +13,9 @@
     if ($connexion_db->connect_error) {
         die("Connection failed: " . $connexion_db->connect_error);
     }
-    
+    //
 
+    
     /* Connexion BDD WSL
 
     $servername = "localhost";
@@ -30,6 +31,4 @@
         die("Connection failed: " . $connexion_db->connect_error);
     }
     */
-    
-    
 ?>

@@ -22,7 +22,7 @@
         $identifiant_personne = strtolower($prenom_personne.'.'.$nom_personne);
 
         $sql = "SELECT * FROM personnel WHERE personnel.perIdentifiant LIKE '%".$identifiant_personne."%'";
-        $result = $connexion_db->query($sql) or die(header('Location: personnel_ajout.php'));
+        $result = $connexion_db->query($sql) or die(header('Location: personnel.php'));
 
         /* Détermine le nombre de lignes du jeu de résultats de la requête */
         $nb_lignes = $result->num_rows;
