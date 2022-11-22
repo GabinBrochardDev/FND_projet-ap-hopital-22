@@ -17,7 +17,7 @@
         // Chiffrage du mot de passe de l'utilisateur en SHA-256
         $hashage_password = crypt($password, '$5$HasHpWdHOpitALlr$');
         // Requête
-        $sql = "SELECT * FROM personnel WHERE (personnel.perIdentifiant = '".$login."') AND (personnel.perPassword = '".$password."') OR (personnel.perPassword = '".$hashage_password."')";
+        $sql = "SELECT * FROM personnel WHERE (personnel.perIdentifiant = '".$login."') AND (personnel.perPassword = '".$hashage_password."')";
         // Résultat de la requête
         $result = $connexion_db->query($sql) or die(header('Location: index.php'));
         if ($row = $result->fetch_assoc())

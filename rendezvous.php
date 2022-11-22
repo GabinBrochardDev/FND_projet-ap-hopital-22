@@ -235,7 +235,7 @@
               </form>
             </div>
           </div>
-          <form action="" method="post">
+          <form action="#" method="post">
             <div class="gille_nouveau_rendezvous">
                 <div class="cellule_nouveau_rendezvous">
                     <label>Nom</label>
@@ -304,7 +304,7 @@
                     <label>Date du RDV</label>
                 </div>
                 <div class="cellule_nouveau_rendezvous">
-                    <input type="date" class="informations_patient" name="date" id="date">
+                    <input type="date" class="informations_patient" name="daterdv" id="daterdv">
                 </div>
                 <div class="cellule_nouveau_rendezvous">
                     <label>Salle</label>

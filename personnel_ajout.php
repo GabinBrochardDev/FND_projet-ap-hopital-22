@@ -8,7 +8,7 @@
     // Informations de la connnexion à la base
     require('_connect.php');
 
-    // On vérifie si le nom et le prénom existent et ont été saisis
+    // On vérifie si les informations du nouveau membre du personnel existent et ont été saisis
     if( isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['password']) && (!empty($_POST['nom'])) && (!empty($_POST['prenom'])) && (!empty($_POST['password'])) )
     {
         // Initialisation des variables

@@ -5,11 +5,11 @@
     // On vérifie le protocole du site Internet en 'HTTP' ou 'HTTPS'
     if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')
     {
-    $protocole = "https://";
+        $protocole = "https://";
     }
     else
     {
-    $protocole = "http://";
+        $protocole = "http://";
     }  
     // Affectation de la variable de session de la page en cours de l'utilisateur
     $_SESSION['page'] = [

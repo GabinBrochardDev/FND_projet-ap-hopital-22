@@ -18,8 +18,17 @@
         $nom = $_SESSION['user']['nom'];
         $prenom = $_SESSION['user']['prenom'];
 
+        // Chiffrage du mot de passe de l'utilisateur en SHA-256
+        $ancien_password = crypt($ancien_password, '$5$HasHpWdHOpitALlr$');
+
         // Requête
         $sql = "SELECT * FROM personnel WHERE (personnel.perIdentifiant = '".$login."') AND (personnel.perPassword = '".$ancien_password."')";
+        
+        echo var_dump($_POST);
+        echo '<br><br>';
+        echo $sql;
+        exit;
+        
         // Résultat de la requête
         $result = $connexion_db->query($sql) or die(header('Location: motdepasse.php'));
         if ($row = $result->fetch_assoc())
