@@ -358,8 +358,6 @@
         <?php
                   $today = getdate();
                   print_r($today);
-                  $ligne_tab = $ligne_tab . date_format($date, 'd/m/Y');
-                  $ligne_tab = $ligne_tab . '</td>';
         ?>
         </main>
       </div>
