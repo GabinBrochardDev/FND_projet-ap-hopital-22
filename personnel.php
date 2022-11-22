@@ -180,7 +180,7 @@
           <div class="cellule_nouveau_personnel">
             <input type="password" placeholder="Mot de passe" id="password" disabled>
             <input type="hidden" name="password" id="password_hidden">
-            <img src="eye.svg" style="width:1%;" id="eye">
+            <img style="width: 20px;" src="eye.svg" id="eye">
             <input type="button" value="Générer" id="rand_password">
           </div>
           <div class="cellule_nouveau_personnel">
@@ -211,7 +211,7 @@
                     if ( ($result->num_rows) > 0)
                     {
                         // On affiche le début de la liste
-                        echo '<select name="salle" id="salle">';
+                        echo '<select name="metier" id="metier">';
                         // On boucle tant que l'on trouve une ligne dans le résultat de la requête
                         while ($row = $result->fetch_assoc())
                         {  

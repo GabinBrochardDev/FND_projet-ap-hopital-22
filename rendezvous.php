@@ -304,7 +304,13 @@
                     <label>Date du RDV</label>
                 </div>
                 <div class="cellule_nouveau_rendezvous">
-                    <input type="date" class="informations_patient" name="daterdv" id="daterdv">
+                    <input type="date" class="informations_patient" min="2018-01-01" max="2018-12-31" name="daterdv" id="daterdv">
+                </div>
+                <div class="cellule_nouveau_rendezvous">
+                    <label>Heure du RDV</label>
+                </div>
+                <div class="cellule_nouveau_rendezvous">
+                    <input type="time" class="informations_patient" name="heurerdv" id="heurerdv">
                 </div>
                 <div class="cellule_nouveau_rendezvous">
                     <label>Salle</label>
@@ -349,6 +355,12 @@
         </form>
         <br>
         <br>
+        <?php
+                  $today = getdate();
+                  print_r($today);
+                  $ligne_tab = $ligne_tab . date_format($date, 'd/m/Y');
+                  $ligne_tab = $ligne_tab . '</td>';
+        ?>
         </main>
       </div>
     </div>

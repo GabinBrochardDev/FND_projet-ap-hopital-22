@@ -11,10 +11,10 @@
     // On vérifie si les informations du patient et la salle existent et ont été saisis
     if( isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['datenaissance']) && isset($_POST['numsecu'])
         && isset($_POST['adresse']) && isset($_POST['codepostal']) && isset($_POST['ville']) && isset($_POST['pays'])
-        && isset($_POST['daterdv']) && isset($_POST['salle']) && isset($_POST['observation'])
+        && isset($_POST['daterdv']) && isset($_POST['heurerdv']) && isset($_POST['salle']) && isset($_POST['observation'])
         && (!empty($_POST['nom'])) && (!empty($_POST['prenom'])) && (!empty($_POST['datenaissance'])) && (!empty($_POST['numsecu']))
         && (!empty($_POST['adresse'])) && (!empty($_POST['codepostal'])) && (!empty($_POST['ville'])) && (!empty($_POST['pays']))
-        && (!empty($_POST['daterdv'])) && (!empty($_POST['salle'])) && (!empty($_POST['observation'])) )
+        && (!empty($_POST['daterdv'])) && (!empty($_POST['heurerdv'])) && (!empty($_POST['salle'])) && (!empty($_POST['observation'])) )
     {
         // Initialisation des variables
         $nom_patient = $_POST['nom'];
@@ -27,18 +27,14 @@
         $ville_patient = $_POST['ville'];
         $pays_patient = $_POST['pays'];
         $date_rdv = $_POST['daterdv'];
+        $heure_rdv = $_POST['heurerdv'];
         $salle_rdv = $_POST['salle'];
-        $observation_rdv = ['observation'];
-        
-
-        
-        
+        $observation_rdv = ['observation'];        
 
         /* Construction de la requête */
         $sql = "INSERT INTO rendezVous (renDateRdv,	renHeureRdv, renDateCreation, renRdvEstAnnule,
                                         renObservation, idPersonnel, idService, idSalle, idPatient)
-                VALUES ('".$date_rdv."', '".$prenom_patient."', '".$sexe_patient."', '".$datenaissance_patient."', '".
-                $numsecu_patient."', '".$adresse_patient."', '".$ville_patient."', '" .$codepostal_patient."', '" .$pays_patient."')";
+                VALUES ()";
 
         /* Insertion des données */
         $result = $connexion_db->query($sql) or die(header('Location: patient_nouveau.php'));

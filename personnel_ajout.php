@@ -47,7 +47,7 @@
         $sql = "INSERT INTO personnel (perIdentifiant, perPassword, perNom, perPrenom, perSexe, perAdmin, idMetier, idService)
                 VALUES ('".$identifiant_personne."', '".$password_personne."', '".$nom_personne."', '".$prenom_personne."', '".
                 $sexe_personne."',".$admin_personne.", '".$metier_personne."', '" .$service_personne."')";
-
+        
         /* Insertion des données */
         $result = $connexion_db->query($sql) or die(header('Location: personnel.php'));
 

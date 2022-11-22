@@ -54,15 +54,11 @@
       <input type="hidden" name="login" value="<?php echo $_SESSION['user']['utilisateur']; ?>">
     </div>
     <div class="form-floating">
-      <input type="text" value="<?php echo $_SESSION['motdepasse']; ?>" class="form-control" id="floatingAncienPassword" disabled>
-      <label for="floatingAncienPassword">Ancien mot de passe</label>
-      <input type="hidden" name="ancien_password" value="<?php echo $_SESSION['motdepasse']; ?>">
-    </div>
-    <div class="form-floating">
       <input type="password" name="password" id="password" class="form-control" id="floatingPassword">
       <label for="floatingPassword">Nouveau mot de passe</label>
     </div>
-    <img src="eye.svg" id="eye">
+    <input type="hidden" name="ancien_password" value="<?php echo $_SESSION['motdepasse']; ?>">
+    <img style="width: 20px;" src="eye.svg" id="eye">
 
     <div class="checkbox mb-3">
         <input type="checkbox" value="remember-me">

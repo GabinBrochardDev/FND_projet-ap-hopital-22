@@ -1,4 +1,5 @@
 <?php
+
     // Connexion BDD Developpement
 
     $servername = "172.16.193.254";
@@ -14,7 +15,6 @@
         die("Connection failed: " . $connexion_db->connect_error);
     }
     
-
     
     /* Connexion BDD WSL
 
