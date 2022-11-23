@@ -196,37 +196,6 @@
             <label>Non Binaire</label>
             <input type="radio" id="non_binaire" name="sexe" value="Non Binaire">
           </div>
-          <div class="cellule_nouveau_personnel">
-            <label>Métier</label>
-          </div>
-          <div class="cellule_nouveau_personnel">
-            <?php
-                    // Tableau avec les noms des colonnes sélectionnées de la table 'Metier'
-                    $metier_colonnes = ['idMetier','metLibelle'];
-                    // Requête
-                    $sql = "SELECT * FROM metier";
-                    // Résultat de la requête
-                    $result = $connexion_db->query($sql) or die('Select - Erreur SQL ! '.$connexion_db->error );
-                    // On vérifie si une ligne est présente dans le résultat de la requête 
-                    if ( ($result->num_rows) > 0)
-                    {
-                        // On affiche le début de la liste
-                        echo '<select name="metier" id="metier">';
-                        // On boucle tant que l'on trouve une ligne dans le résultat de la requête
-                        while ($row = $result->fetch_assoc())
-                        {  
-                            // On affiche la ligne en cours de la liste
-                            echo '<option value=\'' . $row[$metier_colonnes[0]] . '\'>' . $row[$metier_colonnes[1]] . '</option>';
-                        }
-                        // On ferme la liste
-                        echo '</select>';
-                    }
-                    else
-                    {
-                        echo '<label>Aucune métier répertorié.</label>';
-                    }
-                ?>
-            </div>
             <div class="cellule_nouveau_personnel">
               <label>Service</label>
             </div>
@@ -248,7 +217,7 @@
                       while ($row = $result->fetch_assoc())
                       {  
                           // On affiche la ligne en cours de la liste
-                          echo '<option value=\'' . $row[$service_colonnes[0]] . '\'>' . $row[$service_colonnes[1]] . '</option>';
+                          echo '<option value="' . $row[$service_colonnes[0]] . '">' . $row[$service_colonnes[1]] . '</option>';
                       }
                       // On ferme la liste
                       echo '</select>';
@@ -258,6 +227,37 @@
                       echo '<label>Aucune service répertorié.</label>';
                   }
               ?>
+            </div>
+            <div class="cellule_nouveau_personnel">
+            <label>Métier</label>
+          </div>
+          <div class="cellule_nouveau_personnel">
+            <?php
+                    // Tableau avec les noms des colonnes sélectionnées de la table 'Metier'
+                    $metier_colonnes = ['idMetier','metLibelle'];
+                    // Requête
+                    $sql = "SELECT * FROM metier";
+                    // Résultat de la requête
+                    $result = $connexion_db->query($sql) or die('Select - Erreur SQL ! '.$connexion_db->error );
+                    // On vérifie si une ligne est présente dans le résultat de la requête 
+                    if ( ($result->num_rows) > 0)
+                    {
+                        // On affiche le début de la liste
+                        echo '<select name="metier" id="metier">';
+                        // On boucle tant que l'on trouve une ligne dans le résultat de la requête
+                        while ($row = $result->fetch_assoc())
+                        {  
+                            // On affiche la ligne en cours de la liste
+                            echo '<option value="' . $row[$metier_colonnes[0]] . '">' . $row[$metier_colonnes[1]] . '</option>';
+                        }
+                        // On ferme la liste
+                        echo '</select>';
+                    }
+                    else
+                    {
+                        echo '<label>Aucune métier répertorié.</label>';
+                    }
+                ?>
             </div>
             <div class="cellule_nouveau_personnel">
               <label>Administrateur</label>

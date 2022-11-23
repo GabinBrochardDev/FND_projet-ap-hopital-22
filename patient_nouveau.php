@@ -187,7 +187,14 @@
                     Date de naissance
                 </div>
                 <div class="cellule_nouveau_patient">
-                    <input type="date" name="datenaissance" id="datenaissance">
+                    <?php
+                      // Définition du fuseau horaire de Paris
+                      date_default_timezone_set('Europe/Paris');
+                      // Récupération de la date du jour
+                      $date = date('Y-m-d');
+                      // Affichage de la variable dans la ligne suivante pour le type 'date'
+                    ?>
+                    <input type="date" value="<?php echo $date; ?>" min="1900-01-01" max="<?php echo $date; ?>" name="datenaissance" id="datenaissance">
                 </div>
                 <div class="cellule_nouveau_patient">
                     N° de Sécurité Sociale

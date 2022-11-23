@@ -304,13 +304,29 @@
                     <label>Date du RDV</label>
                 </div>
                 <div class="cellule_nouveau_rendezvous">
-                    <input type="date" class="informations_patient" min="2018-01-01" max="2018-12-31" name="daterdv" id="daterdv">
+                    <?php
+                      // Définition du fuseau horaire de Paris
+                      date_default_timezone_set('Europe/Paris');
+                      // Récupération de la date du jour
+                      $date_debut = date('Y-m-d');
+                      // Récupération de la date du jour + 1 année
+                      $date_fin = date('Y-m-d', strtotime('+1 year'));
+                      // Affichage des variables dans la ligne suivante pour le type 'date'
+                    ?>
+                    <input type="date" class="informations_patient" value="<?php echo $date_debut; ?>" min="<?php echo $date_debut; ?>" max="<?php echo $date_fin; ?>" name="daterdv" id="daterdv">
                 </div>
                 <div class="cellule_nouveau_rendezvous">
                     <label>Heure du RDV</label>
                 </div>
                 <div class="cellule_nouveau_rendezvous">
-                    <input type="time" class="informations_patient" name="heurerdv" id="heurerdv">
+                    <?php
+                      // Définition du fuseau horaire de Paris
+                      date_default_timezone_set('Europe/Paris');
+                      // Récupération de l'heure en cours
+                      $heure = date('H:i');
+                      // Affichage de la variable dans la ligne suivante pour le type 'time'
+                    ?>
+                    <input type="time" value="<?php echo $heure; ?>" class="informations_patient" name="heurerdv" id="heurerdv">
                 </div>
                 <div class="cellule_nouveau_rendezvous">
                     <label>Salle</label>
@@ -355,10 +371,6 @@
         </form>
         <br>
         <br>
-        <?php
-                  $today = getdate();
-                  print_r($today);
-        ?>
         </main>
       </div>
     </div>
