@@ -203,8 +203,10 @@
               <?php
                   // Tableau avec les noms des colonnes sélectionnées de la table 'Service'
                   $service_colonnes = ['idService','serLibelle'];
+                  // Tableau avec les ID des services
+                  $services_ID = [];
                   // Requête
-                  $sql = "SELECT * FROM service";
+                  $sql = "SELECT * FROM service ORDER BY service.serLibelle ASC";
                   // Résultat de la requête
                   $result = $connexion_db->query($sql) or die('Select - Erreur SQL ! '.$connexion_db->error );
 
@@ -212,12 +214,14 @@
                   if ( ($result->num_rows) > 0)
                   {
                       // On affiche le début de la liste
-                      echo '<select name="service" id="service">';
+                      echo '<select class="informations_nouveau_patient" name="service" id="service">';
                       // On boucle tant que l'on trouve une ligne dans le résultat de la requête
                       while ($row = $result->fetch_assoc())
                       {  
                           // On affiche la ligne en cours de la liste
                           echo '<option value="' . $row[$service_colonnes[0]] . '">' . $row[$service_colonnes[1]] . '</option>';
+                          // Affectation de l'ID en cours dans le tableau
+                          array_push($services_ID, $row[$service_colonnes[0]]);
                       }
                       // On ferme la liste
                       echo '</select>';
@@ -226,24 +230,26 @@
                   {
                       echo '<label>Aucune service répertorié.</label>';
                   }
-              ?>
-            </div>
-            <div class="cellule_nouveau_personnel">
-            <label>Métier</label>
-          </div>
-          <div class="cellule_nouveau_personnel">
-            <?php
+              
+                  echo '</div><div class="cellule_nouveau_personnel"><label>Métier</label></div><div class="cellule_nouveau_personnel">';
+            
                     // Tableau avec les noms des colonnes sélectionnées de la table 'Metier'
                     $metier_colonnes = ['idMetier','metLibelle'];
                     // Requête
-                    $sql = "SELECT * FROM metier";
+                    $sql = "SELECT service.idService, service.serLibelle, metier.idMetier, metier.metLibelle
+                            FROM metier, service, metier_service
+                            WHERE service.idService = ".$services_ID[0]."
+                            AND service.idService = metier_service.idService
+                            AND metier_service.idMetier = metier.idMetier
+                            ORDER BY metier.metLibelle";
+
                     // Résultat de la requête
                     $result = $connexion_db->query($sql) or die('Select - Erreur SQL ! '.$connexion_db->error );
                     // On vérifie si une ligne est présente dans le résultat de la requête 
                     if ( ($result->num_rows) > 0)
                     {
                         // On affiche le début de la liste
-                        echo '<select name="metier" id="metier">';
+                        echo '<select class="informations_nouveau_patient" name="metier" id="metier">';
                         // On boucle tant que l'on trouve une ligne dans le résultat de la requête
                         while ($row = $result->fetch_assoc())
                         {  
@@ -283,6 +289,7 @@
     <script src="assets/js/dashboard.js"></script>
     <script src="assets/js/motdepasse_aleatoire.js"></script>
     <script src="assets/js/motdepasse.js"></script>
+    <script src="assets/js/service_ajax.js"></script>
 
       <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script>
       <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script>

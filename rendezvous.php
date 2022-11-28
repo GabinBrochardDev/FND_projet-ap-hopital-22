@@ -160,74 +160,12 @@
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
 
           <h3>Sélectionnez un patient pour lui affecter un rendez-vous</h3><br>
+          <span>Recherche : </span><input type="text" placeholder="Nom ou prénom du patient" name="recherche_patient" id="recherche_patient">
+          <br>
+          <br>
           <div class="gille_patient">
-            <div>
-                <?php
-                    // Requête
-                    $sql = "SELECT * FROM patient ORDER BY patient.patNom ASC, patient.patPrenom ASC";
-                    // Résultat de la requête
-                    $result = $connexion_db->query($sql) or die(header('Location: accueil.php'));
-                    // On vérifie si une ligne est présente dans le résultat de la requête 
-                    if ( ($result->num_rows) > 0)
-                    {
-                        // Construction du tableau
-                        $tableau = '<table class="table_rendezvous"><tr><th>Nom</th><th>Prénom</th><th>Sexe</th><th>Date de Naissance</th><th>N° Sécurité Sociale</th><th>Adresse</th><th>Code Postal</th><th>Ville</th><th>Pays</th></tr>';
-                        // On affiche chaque ligne trouvée du résultat de la requête
-                        while ($row = $result->fetch_assoc())
-                        {
-                            // Initialisation de la ligne du tableau
-                            $ligne_tab = '<tr id="'.$row['idPatient'].'">';
-                            // Ajout du nom
-                            $ligne_tab = $ligne_tab . '<td id="nom_'.$row['idPatient'].'">';
-                            $ligne_tab = $ligne_tab . $row['patNom'];
-                            $ligne_tab = $ligne_tab . '</td>';
-                            // Ajout du prénom
-                            $ligne_tab = $ligne_tab . '<td id="prenom_'.$row['idPatient'].'">';
-                            $ligne_tab = $ligne_tab . $row['patPrenom'];
-                            $ligne_tab = $ligne_tab . '</td>';
-                            // Ajout du sexe
-                            $ligne_tab = $ligne_tab . '<td id="sexe_'.$row['idPatient'].'">';
-                            $ligne_tab = $ligne_tab . $row['patSexe'];
-                            $ligne_tab = $ligne_tab . '</td>';
-                            // Ajout de la date de naissance
-                            $ligne_tab = $ligne_tab . '<td id="datenaissance_'.$row['idPatient'].'">';
-                            $date = date_create($row['patDateDeNaissance']);
-                            $ligne_tab = $ligne_tab . date_format($date, 'd/m/Y');
-                            $ligne_tab = $ligne_tab . '</td>';
-                            // Ajout du N° de Sécurité Sociale
-                            $ligne_tab = $ligne_tab . '<td id="numsecu_'.$row['idPatient'].'">';
-                            $ligne_tab = $ligne_tab . $row['patNumSecuriteSocial'];
-                            $ligne_tab = $ligne_tab . '</td>';
-                            // Ajout de l'adresse
-                            $ligne_tab = $ligne_tab . '<td id="adresse_'.$row['idPatient'].'">';
-                            $ligne_tab = $ligne_tab . $row['patAdresse'];
-                            $ligne_tab = $ligne_tab . '</td>';
-                            // Ajout du Code Postal
-                            $ligne_tab = $ligne_tab . '<td id="codepostal_'.$row['idPatient'].'">';
-                            $ligne_tab = $ligne_tab . $row['patCodePostal'];
-                            $ligne_tab = $ligne_tab . '</td>';
-                            // Ajout de la ville
-                            $ligne_tab = $ligne_tab . '<td id="ville_'.$row['idPatient'].'">';
-                            $ligne_tab = $ligne_tab . $row['patVille'];
-                            $ligne_tab = $ligne_tab . '</td>';
-                            // Ajout du pays
-                            $ligne_tab = $ligne_tab . '<td id="pays_'.$row['idPatient'].'">';
-                            $ligne_tab = $ligne_tab . $row['patPays'];
-                            $ligne_tab = $ligne_tab . '</td>';
-                            // Fermeture de la ligne du tableau
-                            $ligne_tab = $ligne_tab . '</tr>';
-                            // Ajout de la ligne dans le tableau
-                            $tableau = $tableau . $ligne_tab;
-                        }
-                        // Affichage du tableau
-                        $tableau = $tableau . '</table>';
-                        echo $tableau;
-                    }
-                    else // La requête renvoie aucun résultat. On affiche un message.
-                    {
-                        echo "Aucun patient trouvé.";
-                    }
-                ?>
+            <div id="tableau_patients">
+              Aucune suggestion.
             </div>
             <div>
               <form action="patient_nouveau.php">
@@ -272,6 +210,7 @@
                     <input type="text" class="informations_patient" id="numsecu" disabled>
                     <input type="hidden" name="numsecu" id="numsecu_hidden">
                 </div>
+                <!----
                 <div class="cellule_nouveau_rendezvous">
                     <label>Adresse</label>
                 </div>
@@ -300,33 +239,121 @@
                     <input type="text" class="informations_patient" id="pays" disabled>
                     <input type="hidden" name="pays" id="pays_hidden">
                 </div>
-                <div class="cellule_nouveau_rendezvous">
-                    <label>Date du RDV</label>
+                ---->
+                <div class="cellule_nouveau_personnel">
+                  <label>Service</label>
                 </div>
-                <div class="cellule_nouveau_rendezvous">
-                    <?php
-                      // Définition du fuseau horaire de Paris
-                      date_default_timezone_set('Europe/Paris');
-                      // Récupération de la date du jour
-                      $date_debut = date('Y-m-d');
-                      // Récupération de la date du jour + 1 année
-                      $date_fin = date('Y-m-d', strtotime('+1 year'));
-                      // Affichage des variables dans la ligne suivante pour le type 'date'
+                <div class="cellule_nouveau_personnel">
+                <?php
+                    // Tableau avec les noms des colonnes sélectionnées de la table 'Service'
+                    $service_colonnes = ['idService','serLibelle'];
+                    // Tableau avec les ID des services
+                    $service_ID = [];
+                    // Requête
+                    $sql = "SELECT * FROM service WHERE service.serPrendRDV = 1 ORDER BY service.serLibelle ASC";
+                    // Résultat de la requête
+                    $result = $connexion_db->query($sql) or die('Select - Erreur SQL ! '.$connexion_db->error );
+
+                    // On vérifie si une ligne est présente dans le résultat de la requête 
+                    if ( ($result->num_rows) > 0)
+                    {
+                        // On affiche le début de la liste
+                        echo '<select class="informations_patient" name="service" id="service">';
+                        // On boucle tant que l'on trouve une ligne dans le résultat de la requête
+                        while ($row = $result->fetch_assoc())
+                        {  
+                            // On affiche la ligne en cours de la liste
+                            echo '<option value="' . $row[$service_colonnes[0]] . '">' . $row[$service_colonnes[1]] . '</option>';
+                            // Affectation de l'ID en cours dans le tableau
+                            array_push($service_ID, $row[$service_colonnes[0]]);
+                        }
+                        // On ferme la liste
+                        echo '</select>';
+                    }
+                    else
+                    {
+                        echo '<label>Aucune service répertorié.</label>';
+                    }
+                
+                    echo '</div><div class="cellule_nouveau_personnel"><label>Métier</label></div><div class="cellule_nouveau_personnel">';
+              
+                      // Tableau avec les noms des colonnes sélectionnées de la table 'Metier'
+                      $metier_colonnes = ['idMetier','metLibelle'];
+                      // Tableau avec les ID des métier
+                      $metier_ID = [];
+                      // Requête
+                      $sql = "SELECT *
+                              FROM metier, service, metier_service
+                              WHERE service.idService = ".$service_ID[0]."
+                              AND service.idService = metier_service.idService
+                              AND metier_service.idMetier = metier.idMetier
+                              ORDER BY metier.metLibelle";
+
+                      // Résultat de la requête
+                      $result = $connexion_db->query($sql) or die('Select - Erreur SQL ! '.$connexion_db->error );
+                      // On vérifie si une ligne est présente dans le résultat de la requête 
+                      if ( ($result->num_rows) > 0)
+                      {
+                          // On affiche le début de la liste
+                          echo '<select class="informations_patient" name="metier" id="metier">';
+                          // On boucle tant que l'on trouve une ligne dans le résultat de la requête
+                          while ($row = $result->fetch_assoc())
+                          {  
+                              // On affiche la ligne en cours de la liste
+                              echo '<option value="' . $row[$metier_colonnes[0]] . '">' . $row[$metier_colonnes[1]] . '</option>';
+                              // Affectation de l'ID en cours dans le tableau
+                              array_push($metier_ID, $row[$metier_colonnes[0]]);
+                          }
+                          // On ferme la liste
+                          echo '</select>';
+                      }
+                      else
+                      {
+                          echo '<label>Aucune métier répertorié.</label>';
+                      }
+                
+                      echo '</div><div class="cellule_nouveau_rendezvous"><label>Personnel</label></div><div class="cellule_nouveau_rendezvous">';
+                      
+                        // Tableau avec les noms des colonnes sélectionnées de la table 'Personnel'
+                        $personnel_colonnes = ['idPersonnel','perNom','perPrenom'];
+                        // Requête
+                        $sql = "SELECT *
+                                FROM personnel
+                                WHERE personnel.idService = ".$service_ID[0]."
+                                AND personnel.idMetier = ".$metier_ID[0]."
+                                ORDER BY personnel.perNom, personnel.perPrenom ASC";
+                        /*
+                        $sql = "SELECT *
+                                FROM personnel, metier, service, metier_service
+                                WHERE service.idService = ".$service_ID[0]."
+                                AND service.idService = metier_service.idService
+                                AND metier_service.idMetier = metier.idMetier
+                                AND metier.idMetier = ".$metier_ID[0]."
+                                AND metier.idMetier = personnel.idPersonnel
+                                ORDER BY personnel.perNom, personnel.perPrenom ASC";
+                        */
+
+                        // Résultat de la requête
+                        $result = $connexion_db->query($sql) or die(header('Location: accueil.php'));
+                        // On vérifie si une ligne est présente dans le résultat de la requête 
+                        if ( ($result->num_rows) > 0)
+                        {
+                            // On affiche le début de la liste
+                            echo '<select class="informations_patient" name="personnel" id="personnel">';
+                            // On boucle tant que l'on trouve une ligne dans le résultat de la requête
+                            while ($row = $result->fetch_assoc())
+                            {  
+                                // On affiche la ligne en cours de la liste
+                                echo '<option value=\'' . $row[$personnel_colonnes[0]] . '\'>' . $row[$personnel_colonnes[1]] . ' ' . $row[$personnel_colonnes[2]] . '</option>';
+                            }
+                            // On ferme la liste
+                            echo '</select>';
+                        }
+                        else
+                        {
+                            echo '<label>Aucune salle répertoriée.</label>';
+                        }
                     ?>
-                    <input type="date" class="informations_patient" value="<?php echo $date_debut; ?>" min="<?php echo $date_debut; ?>" max="<?php echo $date_fin; ?>" name="daterdv" id="daterdv">
-                </div>
-                <div class="cellule_nouveau_rendezvous">
-                    <label>Heure du RDV</label>
-                </div>
-                <div class="cellule_nouveau_rendezvous">
-                    <?php
-                      // Définition du fuseau horaire de Paris
-                      date_default_timezone_set('Europe/Paris');
-                      // Récupération de l'heure en cours
-                      $heure = date('H:i');
-                      // Affichage de la variable dans la ligne suivante pour le type 'time'
-                    ?>
-                    <input type="time" value="<?php echo $heure; ?>" class="informations_patient" name="heurerdv" id="heurerdv">
                 </div>
                 <div class="cellule_nouveau_rendezvous">
                     <label>Salle</label>
@@ -360,6 +387,34 @@
                     ?>
                 </div>
                 <div class="cellule_nouveau_rendezvous">
+                    <label>Date du RDV</label>
+                </div>
+                <div class="cellule_nouveau_rendezvous">
+                    <?php
+                      // Définition du fuseau horaire de Paris
+                      date_default_timezone_set('Europe/Paris');
+                      // Récupération de la date du jour
+                      $date_debut = date('Y-m-d');
+                      // Récupération de la date du jour + 1 année
+                      $date_fin = date('Y-m-d', strtotime('+1 year'));
+                      // Affichage des variables dans la ligne suivante pour le type 'date'
+                    ?>
+                    <input type="date" class="informations_patient" value="<?php echo $date_debut; ?>" min="<?php echo $date_debut; ?>" max="<?php echo $date_fin; ?>" name="daterdv" id="daterdv">
+                </div>
+                <div class="cellule_nouveau_personnel">
+                    <label>Heure du RDV</label>
+                </div>
+                <div class="cellule_nouveau_rendezvous">
+                    <?php
+                      // Définition du fuseau horaire de Paris
+                      date_default_timezone_set('Europe/Paris');
+                      // Récupération de l'heure en cours
+                      $heure = date('H:i');
+                      // Affichage de la variable dans la ligne suivante pour le type 'time'
+                    ?>
+                    <input type="time" value="<?php echo $heure; ?>" class="informations_patient" name="heurerdv" id="heurerdv">
+                </div>
+                <div class="cellule_nouveau_rendezvous">
                     <label>Observation</label>
                 </div>
                 <div class="cellule_nouveau_rendezvous">
@@ -379,6 +434,9 @@
     <script src="assets/js/bootstrap.bundle.min.js"></script>
     <script src="assets/js/dashboard.js"></script>
     <script src="assets/js/patient.js"></script>
+    <script src="assets/js/rendezvous_ajax_patient.js"></script>
+    <script src="assets/js/service_ajax.js"></script>
+    <script src="assets/js/metier_ajax.js"></script>
 
       <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script>
       <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script>

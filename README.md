@@ -26,3 +26,8 @@ else // On affiche la page de l'atelier
     header('Location: atelier.php');
 }
 ````
+
+- [Dev] Création de la fonction JS 'rendezvous_ajax.js' pour afficher le tableau avec les patients
+- [Dev] Création de la page PHP 'rendezvous_ajax_patient.php' éxécutée par la fonction 'rendezvous_ajax.js'
+- [Dev] Création de la fonction 'service_metier.js' pour rafraichir la liste des metiers
+- [Dev] Création de la page PHP 'personnel_ajax_service_metier.php' éxécutée par la fonction 'service_metier.js'
