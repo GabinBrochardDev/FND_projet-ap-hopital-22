@@ -16,8 +16,6 @@
               'protocole' => $protocole,
               'adresse' => $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']
             ];
-    // création de la connexion
-    $_SESSION['connexion'] = 1;
 ?>
 <!doctype html>
 <html lang="en">
