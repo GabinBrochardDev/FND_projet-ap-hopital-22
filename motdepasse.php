@@ -46,7 +46,7 @@
       <path d="M5 1a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1a1 1 0 0 1 1 1v4h3a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1h3V3a1 1 0 0 1 1-1V1Zm2 14h2v-3H7v3Zm3 0h1V3H5v12h1v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3Zm0-14H6v1h4V1Zm2 7v7h3V8h-3Zm-8 7V8H1v7h3Z"/>
     </svg>
     <h1 class="h3 mb-3 fw-normal">Hopital La Rochelle</h1>
-    <h1 class="h3 mb-3 fw-normal">Connexion personel</h1>
+    <h1 class="h3 mb-3 fw-normal">Changement du<br>mot de passe</h1>
 
     <div class="form-floating">
       <input type="text" value="<?php echo $_SESSION['user']['utilisateur']; ?>" class="form-control" id="floatingInput" disabled>
@@ -58,7 +58,7 @@
       <label for="floatingPassword">Nouveau mot de passe</label>
     </div>
     <input type="hidden" name="ancien_password" value="<?php echo $_SESSION['motdepasse']; ?>">
-    <img style="width: 20px;" src="eye.svg" id="eye">
+    <img style="width: 20px;" src="assets/src/eye.svg" id="eye">
 
     <div class="checkbox mb-3">
         <input type="checkbox" value="remember-me">

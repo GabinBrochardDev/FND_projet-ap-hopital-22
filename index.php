@@ -16,6 +16,8 @@
               'protocole' => $protocole,
               'adresse' => $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']
             ];
+    // création de la connexion
+    $_SESSION['connexion'] = 1;
 ?>
 <!doctype html>
 <html lang="en">
@@ -58,7 +60,7 @@
       <input type="password" name="password" id="password" class="form-control" id="floatingPassword" placeholder="Mot de passe">
       <label for="floatingPassword">Mot de passe</label>
     </div>
-    <img style="width: 20px;" src="eye.svg" id="eye">
+    <img style="width: 20px;" src="assets/src/eye.svg" id="eye">
     <div class="checkbox mb-3">
         <input type="checkbox" value="remember-me">
         <label>Rester connecté</label>

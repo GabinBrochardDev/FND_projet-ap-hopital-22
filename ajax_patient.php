@@ -72,32 +72,14 @@
             // Affichage du tableau
             $tableau = $tableau . '</table>';
             echo $tableau;
-            exit;
         }
         else // La requête renvoie aucun résultat. On affiche un message.
         {
             echo "Aucune suggestion.";
-            exit;
         }
     }
-    else
+    else // Le filtre n'existe pas et est vide. On affiche un message.
     {
-        // Si le filtre n'exsite pas, on affiche le message et on arrête le traitement
-        echo 'Aucune suggestion.';
-        exit;
+        echo "Aucune suggestion.";
     }
-
-    /*
-   // On est sûr que le filtre est bon, on peut effectuer la filtre
-   if (($filtre == 'l') ||  ($filtre == 'L')) {
-    echo 'ludo';
-   }
-   else  {
-    echo 'papa';
-   }
-   */
-
-   
-
-
 ?>

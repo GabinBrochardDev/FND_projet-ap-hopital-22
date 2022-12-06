@@ -110,16 +110,22 @@
     padding: 0px 0px 20px 0px;
 }
 
-.informations_patient
+.informations_rendezvous
 {
   width: 500px;
   resize: none;
 }
-.observation_patient
+.observation_rendezvous
 {
   width: 500px;
   height: 120px;
   resize: none;
+}
+
+.erreur_rendezvous
+{
+  color: brown;
+  font-size: 16px;
 }
 
 /* FIN */

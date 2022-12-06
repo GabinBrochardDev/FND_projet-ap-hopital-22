@@ -18,7 +18,7 @@
     }
     */
 
-    /* Connexion BDD WSL
+    /* Connexion BDD WSL 
 
     $servername = 'localhost';
     $username = 'root';
@@ -33,6 +33,7 @@
         die("Connection failed: " . $connexion_db->connect_error);
     }
     */
+    
 
     
     if (strstr($_SESSION['page']['adresse'], "193"))
@@ -86,5 +87,6 @@
             die("Connection failed: " . $connexion_db->connect_error);
         }
     }
+    
     
 ?>

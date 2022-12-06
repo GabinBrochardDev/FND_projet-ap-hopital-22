@@ -71,7 +71,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="rendezvous_gestion.php">
                   <span data-feather="users" class="align-text-bottom"></span>
                   Gestion des rendez-vous
                 </a>

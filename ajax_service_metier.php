@@ -46,9 +46,8 @@
             echo '<select name="metier" id="metier"><option value=0>Aucune métier répertorié.</option></select>';
         }
     }
-    else
+    else // Le filtre n'existe pas et est vide. On affiche un message.
     {
-        // Si le filtre n'exsite pas, on affiche le message et on arrête le traitement.
         echo '<select name="metier" id="metier"><option value=0>Aucune métier répertorié.</option></select>';
     }
 ?>

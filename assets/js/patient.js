@@ -28,7 +28,9 @@ function InfosUtilisateur(aEvent)
                 id_OK = true;
             }
         }
-
+        
+        // Ajout de l'ID du patient dans le champ 'input' pour l'ID "id_patient"
+        document.getElementById("id_patient").value = id_element;
         // Ajout du nom du patient dans les champ 'input' pour l'ID "nom" et l'ID "nom_hidden"
         document.getElementById("nom").value = document.getElementById("nom_" + id_element).innerHTML;
         document.getElementById("nom_hidden").value = document.getElementById("nom_" + id_element).innerHTML;
@@ -44,18 +46,6 @@ function InfosUtilisateur(aEvent)
         // Ajout du N° de Sécurité Sociale du patient dans les champ 'input' pour l'ID "numsecu" et l'ID "numsecu_hidden"
         document.getElementById("numsecu").value = document.getElementById("numsecu_" + id_element).innerHTML;
         document.getElementById("numsecu_hidden").value = document.getElementById("numsecu_" + id_element).innerHTML;
-        // Ajout de l'adresse du patient dans les champ 'input' pour l'ID "adresse" et l'ID "adresse_hidden"
-        document.getElementById("adresse").value = document.getElementById("adresse_" + id_element).innerHTML;
-        document.getElementById("adresse_hidden").value = document.getElementById("adresse_" + id_element).innerHTML;
-        // Ajout du Code Postal du patient dans les champ 'input' pour l'ID "codepostal" et l'ID "codepostal_hidden"
-        document.getElementById("codepostal").value = document.getElementById("codepostal_" + id_element).innerHTML;
-        document.getElementById("codepostal_hidden").value = document.getElementById("codepostal_" + id_element).innerHTML;
-        // Ajout de la vile du patient dans les champ 'input' pour l'ID "ville" et l'ID "ville_hidden"
-        document.getElementById("ville").value = document.getElementById("ville_" + id_element).innerHTML;
-        document.getElementById("ville_hidden").value = document.getElementById("ville_" + id_element).innerHTML;
-        // Ajout du pays du patient dans les champ 'input' pour l'ID "pays" et l'ID "pays_hidden"
-        document.getElementById("pays").value = document.getElementById("pays_" + id_element).innerHTML;
-        document.getElementById("pays_hidden").value = document.getElementById("pays_" + id_element).innerHTML;
     }
 }
 /* =========================================== */

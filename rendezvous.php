@@ -73,7 +73,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="rendezvous_gestion.php">
                   <span data-feather="users" class="align-text-bottom"></span>
                   Gestion des rendez-vous
                 </a>
@@ -160,7 +160,7 @@
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
 
           <h3>Sélectionnez un patient pour lui affecter un rendez-vous</h3><br>
-          <span>Recherche : </span><input type="text" placeholder="Nom ou prénom du patient" name="recherche_patient" id="recherche_patient">
+          <span>Recherche : </span><input type="text" class="informations_rendezvous" placeholder="Nom ou prénom du patient" name="recherche_patient" id="recherche_patient">
           <br>
           <br>
           <div class="gille_patient">
@@ -173,84 +173,60 @@
               </form>
             </div>
           </div>
-          <form action="#" method="post">
+          <form action="rendezvous_ajout.php" method="post">
+            <input type="hidden" name="id_patient" id="id_patient">
             <div class="gille_nouveau_rendezvous">
                 <div class="cellule_nouveau_rendezvous">
                     <label>Nom</label>
                 </div>
                 <div class="cellule_nouveau_rendezvous">
-                    <input type="text" class="informations_patient" id="nom" disabled>
+                    <input type="text" class="informations_rendezvous" id="nom" disabled>
                     <input type="hidden" name="nom" id="nom_hidden" >
                 </div>
                 <div class="cellule_nouveau_rendezvous">
                     <label>Prénom</label>
                 </div>
                 <div class="cellule_nouveau_rendezvous">
-                    <input type="text" class="informations_patient" id="prenom" disabled>
+                    <input type="text" class="informations_rendezvous" id="prenom" disabled>
                     <input type="hidden" name="prenom" id="prenom_hidden">
                 </div>
                 <div class="cellule_nouveau_rendezvous">
                     <label>Sexe</label>
                 </div>
                 <div class="cellule_nouveau_rendezvous">
-                    <input type="text" class="informations_patient" id="sexe" disabled>
+                    <input type="text" class="informations_rendezvous" id="sexe" disabled>
                     <input type="hidden" name="sexe" id="sexe_hidden">
                 </div>
                 <div class="cellule_nouveau_rendezvous">
                     <label>Date de naissance</label>
                 </div>
                 <div class="cellule_nouveau_rendezvous">
-                    <input type="text" class="informations_patient" id="datenaissance" disabled>
+                    <input type="text" class="informations_rendezvous" id="datenaissance" disabled>
                     <input type="hidden" name="datenaissance" id="datenaissance_hidden">
                 </div>
                 <div class="cellule_nouveau_rendezvous">
                     <label>N° Sécurité Sociale</label>
                 </div>
                 <div class="cellule_nouveau_rendezvous">
-                    <input type="text" class="informations_patient" id="numsecu" disabled>
+                    <input type="text" class="informations_rendezvous" id="numsecu" disabled>
                     <input type="hidden" name="numsecu" id="numsecu_hidden">
                 </div>
-                <!----
-                <div class="cellule_nouveau_rendezvous">
-                    <label>Adresse</label>
-                </div>
-                <div class="cellule_nouveau_rendezvous">
-                    <input type="text" class="informations_patient" id="adresse" disabled>
-                    <input type="hidden" name="adresse" id="adresse_hidden">
-                </div>
-                <div class="cellule_nouveau_rendezvous">
-                    <label>Code Postal</label>
-                </div>
-                <div class="cellule_nouveau_rendezvous">
-                    <input type="text" class="informations_patient" id="codepostal" disabled>
-                    <input type="hidden" name="codepostal" id="codepostal_hidden">
-                </div>
-                <div class="cellule_nouveau_rendezvous">
-                    <label>Ville</label>
-                </div>
-                <div class="cellule_nouveau_rendezvous">
-                    <input type="text" class="informations_patient" id="ville" disabled>
-                    <input type="hidden" name="ville" id="ville_hidden">
-                </div>
-                <div class="cellule_nouveau_rendezvous">
-                    <label>Pays</label>
-                </div>
-                <div class="cellule_nouveau_rendezvous">
-                    <input type="text" class="informations_patient" id="pays" disabled>
-                    <input type="hidden" name="pays" id="pays_hidden">
-                </div>
-                ---->
                 <div class="cellule_nouveau_personnel">
                   <label>Service</label>
                 </div>
                 <div class="cellule_nouveau_personnel">
                 <?php
                     // Tableau avec les noms des colonnes sélectionnées de la table 'Service'
-                    $service_colonnes = ['idService','serLibelle'];
+                    $service_colonnes = ['idService','serLibelle','serDuree'];
                     // Tableau avec les ID des services
                     $service_ID = [];
+                    // Tableau avec les durées des services
+                    $service_duree = [];
                     // Requête
-                    $sql = "SELECT * FROM service WHERE service.serPrendRDV = 1 ORDER BY service.serLibelle ASC";
+                    $sql = "SELECT *
+                            FROM service
+                            WHERE service.serPrendRDV = 1
+                            ORDER BY service.serLibelle ASC";
                     // Résultat de la requête
                     $result = $connexion_db->query($sql) or die('Select - Erreur SQL ! '.$connexion_db->error );
 
@@ -258,7 +234,7 @@
                     if ( ($result->num_rows) > 0)
                     {
                         // On affiche le début de la liste
-                        echo '<select class="informations_patient" name="service" id="service">';
+                        echo '<select class="informations_rendezvous" name="service" id="service">';
                         // On boucle tant que l'on trouve une ligne dans le résultat de la requête
                         while ($row = $result->fetch_assoc())
                         {  
@@ -266,17 +242,23 @@
                             echo '<option value="' . $row[$service_colonnes[0]] . '">' . $row[$service_colonnes[1]] . '</option>';
                             // Affectation de l'ID en cours dans le tableau
                             array_push($service_ID, $row[$service_colonnes[0]]);
+                            // Affectation de l'ID en cours dans le tableau
+                            array_push($service_duree, $row[$service_colonnes[2]]);
                         }
                         // On ferme la liste
                         echo '</select>';
                     }
                     else
                     {
-                        echo '<label>Aucune service répertorié.</label>';
+                        echo '<select class="informations_rendezvous" name="service" id="service"><option value="0"Aucune service répertorié.</option></select>';
                     }
-                
-                    echo '</div><div class="cellule_nouveau_personnel"><label>Métier</label></div><div class="cellule_nouveau_personnel">';
-              
+                ?>
+                </div>
+                <div class="cellule_nouveau_personnel">
+                  <label>Métier</label>
+                </div>
+                <div class="cellule_nouveau_personnel">
+                <?php
                       // Tableau avec les noms des colonnes sélectionnées de la table 'Metier'
                       $metier_colonnes = ['idMetier','metLibelle'];
                       // Tableau avec les ID des métier
@@ -295,7 +277,7 @@
                       if ( ($result->num_rows) > 0)
                       {
                           // On affiche le début de la liste
-                          echo '<select class="informations_patient" name="metier" id="metier">';
+                          echo '<select class="informations_rendezvous" name="metier" id="metier">';
                           // On boucle tant que l'on trouve une ligne dans le résultat de la requête
                           while ($row = $result->fetch_assoc())
                           {  
@@ -309,11 +291,15 @@
                       }
                       else
                       {
-                          echo '<label>Aucune métier répertorié.</label>';
+                          echo '<select class="informations_rendezvous" name="metier" id="metier"><option value="0">Aucune métier répertorié.</option></select>';
                       }
-                
-                      echo '</div><div class="cellule_nouveau_rendezvous"><label>Personnel</label></div><div class="cellule_nouveau_rendezvous">';
-                      
+                ?>
+                </div>
+                <div class="cellule_nouveau_rendezvous">
+                  <label>Personnel</label>
+                </div>
+                <div class="cellule_nouveau_rendezvous">
+                <?php
                         // Tableau avec les noms des colonnes sélectionnées de la table 'Personnel'
                         $personnel_colonnes = ['idPersonnel','perNom','perPrenom'];
                         // Requête
@@ -322,16 +308,6 @@
                                 WHERE personnel.idService = ".$service_ID[0]."
                                 AND personnel.idMetier = ".$metier_ID[0]."
                                 ORDER BY personnel.perNom, personnel.perPrenom ASC";
-                        /*
-                        $sql = "SELECT *
-                                FROM personnel, metier, service, metier_service
-                                WHERE service.idService = ".$service_ID[0]."
-                                AND service.idService = metier_service.idService
-                                AND metier_service.idMetier = metier.idMetier
-                                AND metier.idMetier = ".$metier_ID[0]."
-                                AND metier.idMetier = personnel.idPersonnel
-                                ORDER BY personnel.perNom, personnel.perPrenom ASC";
-                        */
 
                         // Résultat de la requête
                         $result = $connexion_db->query($sql) or die(header('Location: accueil.php'));
@@ -339,19 +315,19 @@
                         if ( ($result->num_rows) > 0)
                         {
                             // On affiche le début de la liste
-                            echo '<select class="informations_patient" name="personnel" id="personnel">';
+                            echo '<select class="informations_rendezvous" name="personnel" id="personnel">';
                             // On boucle tant que l'on trouve une ligne dans le résultat de la requête
                             while ($row = $result->fetch_assoc())
                             {  
                                 // On affiche la ligne en cours de la liste
-                                echo '<option value=\'' . $row[$personnel_colonnes[0]] . '\'>' . $row[$personnel_colonnes[1]] . ' ' . $row[$personnel_colonnes[2]] . '</option>';
+                                echo '<option value="' . $row[$personnel_colonnes[0]] . '">' . $row[$personnel_colonnes[1]] . ' ' . $row[$personnel_colonnes[2]] . '</option>';
                             }
                             // On ferme la liste
                             echo '</select>';
                         }
                         else
                         {
-                            echo '<label>Aucune salle répertoriée.</label>';
+                            echo '<select class="informations_rendezvous" name="personnel" id="personnel"><option value="0">Aucune salle répertoriée.</option></select>';
                         }
                     ?>
                 </div>
@@ -363,27 +339,66 @@
                         // Tableau avec les noms des colonnes sélectionnées de la table 'Salle'
                         $salle_colonnes = ['idSalle','salLibelle'];
                         // Requête
-                        $sql = "SELECT * FROM salle";
+                        $sql = "SELECT *
+                                FROM salle, service
+                                WHERE salle.idService = ".$service_ID[0]."
+                                AND salle.idService = service.idService";
                         // Résultat de la requête
                         $result = $connexion_db->query($sql) or die(header('Location: accueil.php'));
                         // On vérifie si une ligne est présente dans le résultat de la requête 
                         if ( ($result->num_rows) > 0)
                         {
                             // On affiche le début de la liste
-                            echo '<select name="salle" id="salle">';
+                            echo '<select class="informations_rendezvous" name="salle" id="salle">';
                             // On boucle tant que l'on trouve une ligne dans le résultat de la requête
                             while ($row = $result->fetch_assoc())
                             {  
                                 // On affiche la ligne en cours de la liste
-                                echo '<option value=\'' . $row[$salle_colonnes[0]] . '\'>' . $row[$salle_colonnes[1]] . '</option>';
+                                echo '<option value="' . $row[$salle_colonnes[0]] . '">' . $row[$salle_colonnes[1]] . '</option>';
                             }
                             // On ferme la liste
                             echo '</select>';
                         }
                         else
                         {
-                            echo '<label>Aucune salle répertoriée.</label>';
+                            echo '<select class="informations_rendezvous" name="salle" id="salle"><option value="0">Aucune salle répertoriée.</option></select>';
                         }
+                    ?>
+                </div>
+                <div class="cellule_nouveau_rendezvous">
+                    <label>Durée du RDV</label>
+                </div>
+                <div class="cellule_nouveau_rendezvous">
+                    <?php
+                      // Tableau avec les noms des colonnes sélectionnées de la table 'Metier'
+                      $metier_colonnes = ['idMetier','metLibelle'];
+                      // Tableau avec les ID des métier
+                      $metier_ID = [];
+                      // Requête
+                      $sql = "SELECT *
+                              FROM service
+                              WHERE service.serPrendRDV = 1
+                              AND service.idService = ".$service_ID[0];
+
+                      // Résultat de la requête
+                      $result = $connexion_db->query($sql) or die(header('Location: accueil.php'));
+                      // On vérifie si une ligne est présente dans le résultat de la requête 
+                      if ( ($result->num_rows) > 0)
+                      {
+                          // On récupère les informations de la requête si le fetch est possible
+                          if ($row = $result->fetch_assoc())
+                          {  
+                              // On affiche le champ 'input' avec la durée du premier service de la liste
+                              echo '<input type="text" class="informations_rendezvous" id="dureerdv" value="'.$row[$service_colonnes[2]].' minutes" disabled>
+                                  <input type="hidden" name="dureerdv" id="dureerdv_hidden" value="'.$row[$service_colonnes[2]].'">';
+                          }
+                      }
+                      else
+                      {
+                          // On affiche le champ 'input' vide
+                          echo '<input type="text" class="informations_rendezvous" id="dureerdv" value="" disabled>
+                              <input type="hidden" name="dureerdv" id="dureerdv_hidden" value="">';
+                      }
                     ?>
                 </div>
                 <div class="cellule_nouveau_rendezvous">
@@ -399,7 +414,7 @@
                       $date_fin = date('Y-m-d', strtotime('+1 year'));
                       // Affichage des variables dans la ligne suivante pour le type 'date'
                     ?>
-                    <input type="date" class="informations_patient" value="<?php echo $date_debut; ?>" min="<?php echo $date_debut; ?>" max="<?php echo $date_fin; ?>" name="daterdv" id="daterdv">
+                    <input type="date" class="informations_rendezvous" value="<?php echo $date_debut; ?>" min="<?php echo $date_debut; ?>" max="<?php echo $date_fin; ?>" name="daterdv" id="daterdv">
                 </div>
                 <div class="cellule_nouveau_personnel">
                     <label>Heure du RDV</label>
@@ -412,17 +427,25 @@
                       $heure = date('H:i');
                       // Affichage de la variable dans la ligne suivante pour le type 'time'
                     ?>
-                    <input type="time" value="<?php echo $heure; ?>" class="informations_patient" name="heurerdv" id="heurerdv">
+                    <input type="time" value="<?php echo $heure; ?>" class="informations_rendezvous" name="heurerdv" id="heurerdv">
                 </div>
                 <div class="cellule_nouveau_rendezvous">
                     <label>Observation</label>
                 </div>
                 <div class="cellule_nouveau_rendezvous">
-                    <textarea type="textarea" class="observation_patient" placeholder="Informations complémentaires sur le patient" name="observation" id="observation"></textarea>
+                    <textarea type="textarea" class="observation_rendezvous" placeholder="Informations complémentaires sur le patient" name="observation" id="observation"></textarea>
                 </div>
+                <div class="cellule_nouveau_rendezvous">
+                    <button type="submit">Ajouter le RDV</button>
+                </div>
+                    <?php
+                    // On vérifie si le message d'erreur existe
+                      if (isset($_SESSION['erreurRDV']) && (strlen($_SESSION['erreurRDV']) > 0))
+                      {
+                        echo '<div class="cellule_nouveau_rendezvous"><div class="informations_rendezvous erreur_rendezvous">'.$_SESSION['erreurRDV'].'</div></div>';
+                      }
+                    ?>
             </div>
-            <br>
-            <button type="submit">Ajouter le RDV</button>
         </form>
         <br>
         <br>
@@ -434,9 +457,9 @@
     <script src="assets/js/bootstrap.bundle.min.js"></script>
     <script src="assets/js/dashboard.js"></script>
     <script src="assets/js/patient.js"></script>
-    <script src="assets/js/rendezvous_ajax_patient.js"></script>
-    <script src="assets/js/service_ajax.js"></script>
-    <script src="assets/js/metier_ajax.js"></script>
+    <script src="assets/js/ajax_patient.js"></script>
+    <script src="assets/js/ajax_service.js"></script>
+    <script src="assets/js/ajax_metier.js"></script>
 
       <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script>
       <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script>

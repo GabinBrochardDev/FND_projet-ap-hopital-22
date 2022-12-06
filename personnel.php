@@ -73,7 +73,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="rendezvous_gestion.php">
                   <span data-feather="users" class="align-text-bottom"></span>
                   Gestion des rendez-vous
                 </a>
@@ -180,7 +180,7 @@
           <div class="cellule_nouveau_personnel">
             <input type="password" placeholder="Mot de passe" id="password" disabled>
             <input type="hidden" name="password" id="password_hidden">
-            <img style="width: 20px;" src="eye.svg" id="eye">
+            <img style="width: 20px;" src="assets/src/eye.svg" id="eye">
             <input type="button" value="Générer" id="rand_password">
           </div>
           <div class="cellule_nouveau_personnel">
@@ -289,7 +289,7 @@
     <script src="assets/js/dashboard.js"></script>
     <script src="assets/js/motdepasse_aleatoire.js"></script>
     <script src="assets/js/motdepasse.js"></script>
-    <script src="assets/js/service_ajax.js"></script>
+    <script src="assets/js/ajax_service.js"></script>
 
       <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script>
       <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script>

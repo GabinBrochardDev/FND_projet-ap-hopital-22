@@ -46,9 +46,8 @@
             echo '<select name="personnel" id="personnel"><option value=0>Aucun membre du personnel associé.</option></select>';
         }
     }
-    else
+    else // Le filtre n'existe pas et est vide. On affiche un message.
     {
-        // Si le filtre n'exsite pas, on affiche le message et on arrête le traitement.
         echo '<select name="personnel" id="personnel"><option value=0>Aucun membre du personnel associé.</option></select>';
     }
 ?>
