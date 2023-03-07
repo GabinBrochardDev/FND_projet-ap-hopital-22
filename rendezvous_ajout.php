@@ -30,7 +30,7 @@
         $duree_rdv = $_POST['dureerdv'];
         $date_rdv = $_POST['daterdv'];
         $heure_rdv = $_POST['heurerdv'];
-        $observation_rdv = $_POST['observation'];   
+        $observation_rdv = $_POST['observation'];
 
         // Définition du fuseau horaire de Paris
         date_default_timezone_set('Europe/Paris');

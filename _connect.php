@@ -1,92 +1,19 @@
 <?php
-    
+    // Connexion BDD SRV 172.16.193.254
 
+    // Information d'identification
+    $servername = '127.0.0.1';
+    $username   = 'hopital-user';
+    $password   = 'bKmKTazcwWl3emRc';
+    $db         = 'hopital-data';
 
-    /* Connexion BDD Developpement
-
-    $servername = '172.16.193.254';
-    $username = 'hopital-user';
-    $password = 'bKmKTazcwWl3emRc';
-    $db = 'hopital-data';
-
-    // Create connection
+    // Initialisation de la connexion (<IP>, <username>, <password>, <bdd_name>)
     $connexion_db = new mysqli($servername, $username, $password, $db);
 
-    // Check connection
-    if ($connexion_db->connect_error) {
+    // On vérifie si la connexion est réussie
+    if ($connexion_db->connect_error)
+    {
+        // La connexion a la BDD ne ces pas correctement initialisés 
         die("Connection failed: " . $connexion_db->connect_error);
     }
-    */
-
-    /* Connexion BDD WSL 
-
-    $servername = 'localhost';
-    $username = 'root';
-    $password = '$SrvLudo+00!';
-    $db = "hopital-data";
-
-    // Create connection
-    $connexion_db = new mysqli($servername, $username, $password, $db);
-
-    // Check connection
-    if ($connexion_db->connect_error) {
-        die("Connection failed: " . $connexion_db->connect_error);
-    }
-    */
-    
-
-    
-    if (strstr($_SESSION['page']['adresse'], "193"))
-    {
-        // Connexion BDD Developpement
-
-        $servername = '172.16.193.254';
-        $username = 'hopital-user';
-        $password = 'bKmKTazcwWl3emRc';
-        $db = 'hopital-data';
-
-        // Create connection
-        $connexion_db = new mysqli($servername, $username, $password, $db);
-
-        // Check connection
-        if ($connexion_db->connect_error) {
-            die("Connection failed: " . $connexion_db->connect_error);
-        }
-    }
-    elseif (strstr($_SESSION['page']['adresse'], "197"))
-    {
-        // Connexion BDD Production
-
-        $servername = '172.16.197.254';
-        $username = 'root';
-        $password = '$SrvLudo+00!';
-        $db = 'hopital-data';
-
-        // Create connection
-        $connexion_db = new mysqli($servername, $username, $password, $db);
-
-        // Check connection
-        if ($connexion_db->connect_error) {
-            die("Connection failed: " . $connexion_db->connect_error);
-        }
-    }
-    elseif (strstr($_SESSION['page']['adresse'], "localhost"))
-    {
-        // Connexion BDD WSL
-
-        $servername = 'localhost';
-        $username = 'root';
-        $password = '$SrvLudo+00!';
-        $db = "hopital-data";
-
-        // Create connection
-        $connexion_db = new mysqli($servername, $username, $password, $db);
-
-        // Check connection
-        if ($connexion_db->connect_error) {
-            die("Connection failed: " . $connexion_db->connect_error);
-        }
-    }
-    
-    
 ?>

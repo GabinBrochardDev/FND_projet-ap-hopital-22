@@ -1,5 +1,6 @@
 <?php
     session_start(); // Démarrage ou suite de la session
+    // On vérifie si un utilisateur est connecté, si oui
     // Si une connexion de session n'existe pas, on redirige à la page 'index.php'
     if ( !isset($_SESSION['connexion']) || ($_SESSION['connexion'] == 0) )
     {   
